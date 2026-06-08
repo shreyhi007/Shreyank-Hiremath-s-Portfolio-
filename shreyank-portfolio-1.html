@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyank Hiremath — Social Media Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0d0b;
+    --cream: #f5f0e8;
+    --rust: #c94f2c;
+    --gold: #c9a84c;
+    --muted: #7a7164;
+    --border: #d4cec4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    mix-blend-mode: normal;
+  }
+
+  nav .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--rust); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px;
+  }
+
+  .hero-left {
+    padding: 6rem 3rem 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 10vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: normal;
+    color: var(--rust);
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--muted);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-desc {
+    margin-top: 2rem;
+    max-width: 420px;
+    line-height: 1.75;
+    font-size: 0.95rem;
+    color: #4a4540;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--rust);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: #a83e1f; transform: translateY(-2px); }
+
+  .btn-ghost {
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+
+  .hero-right {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-right::before {
+    content: 'SH';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 35vw;
+    color: rgba(255,255,255,0.03);
+    position: absolute;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .stat-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .stat-cell {
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+  }
+
+  .stat-cell:hover { background: rgba(255,255,255,0.04); }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.5rem;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 7rem 5rem; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    border: 1px solid var(--rust);
+    padding: 0.3rem 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 3rem;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  #experience .section-heading { color: var(--cream); }
+  #experience .section-tag { color: var(--gold); border-color: var(--gold); }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 2.5rem 0;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .exp-item:hover { background: rgba(255,255,255,0.03); padding-left: 1rem; }
+
+  .exp-left { padding-right: 2rem; }
+
+  .exp-period {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-company {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .exp-right { }
+
+  .exp-role {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+    color: var(--cream);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.6);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--cream); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--cream);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+  }
+
+  .skill-card:hover { background: var(--ink); color: var(--cream); }
+  .skill-card:hover .skill-name { color: var(--gold); }
+  .skill-card:hover .skill-tools { color: rgba(255,255,255,0.55); }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+
+  .skill-tools {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    background: #1a1714;
+    color: var(--cream);
+    padding: 7rem 5rem;
+  }
+
+  #about .section-tag { color: var(--gold); border-color: var(--gold); }
+  #about .section-heading { color: var(--cream); margin-bottom: 1.5rem; }
+
+  .about-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .about-body p + p { margin-top: 1.2rem; }
+
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+  }
+
+  .cert-badge {
+    width: 36px; height: 36px;
+    background: var(--rust);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #fff;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .cert-title { color: var(--cream); font-size: 0.85rem; }
+  .cert-issuer { color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-top: 0.15rem; }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--rust);
+    color: #fff;
+    padding: 6rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  #contact .section-tag { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.4); }
+
+  .contact-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.03em;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    text-decoration: none;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9rem;
+    transition: color 0.2s, gap 0.2s;
+  }
+
+  .contact-link:hover { color: #fff; gap: 1.8rem; }
+
+  .contact-link-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .contact-link:hover .contact-link-icon { background: rgba(255,255,255,0.15); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.3);
+    padding: 1.5rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDER TICKER ── */
+  .ticker-wrap {
+    background: var(--rust);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.7rem 0;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 18s linear infinite;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .ticker-inner span { margin: 0 3rem; }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1.2rem; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .hero-left { padding: 6rem 1.5rem 3rem; }
+    .hero-right { min-height: 50vw; }
+
+    section { padding: 5rem 1.5rem; }
+
+    .exp-item { grid-template-columns: 1fr; gap: 0.8rem; }
+
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+
+    #about { grid-template-columns: 1fr; padding: 5rem 1.5rem; }
+
+    #contact { grid-template-columns: 1fr; padding: 5rem 1.5rem; }
+
+    footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Shreyank Hiremath</div>
+  <ul>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Social Media × Content Strategy × Entertainment</p>
+    <h1 class="hero-name">Shrey<em>ank</em><br>Hire<em>math</em></h1>
+    <p class="hero-title">Social Media Account Manager</p>
+    <p class="hero-desc">
+      3+ years building brand presence across Instagram, LinkedIn, Facebook, and YouTube. 
+      Passionate about the intersection of culture, live events, and content — from 
+      performance analytics to pre-show hype cycles that actually move tickets.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:Shreyankhiremath21@gmail.com" class="btn-primary">Get in Touch</a>
+      <a href="#experience" class="btn-ghost">View Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Platforms Managed</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">BLR</div>
+        <div class="stat-label">Based in Bengaluru</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>Content Strategy</span><span>·</span>
+    <span>Campaign Management</span><span>·</span>
+    <span>Paid Media</span><span>·</span>
+    <span>Short-Form Video</span><span>·</span>
+    <span>Analytics & Reporting</span><span>·</span>
+    <span>Brand Building</span><span>·</span>
+    <span>Live Events</span><span>·</span>
+    <span>Content Strategy</span><span>·</span>
+    <span>Campaign Management</span><span>·</span>
+    <span>Paid Media</span><span>·</span>
+    <span>Short-Form Video</span><span>·</span>
+    <span>Analytics & Reporting</span><span>·</span>
+    <span>Brand Building</span><span>·</span>
+    <span>Live Events</span><span>·</span>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-tag">Experience</p>
+  <h2 class="section-heading">Work History</h2>
+
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <p class="exp-period">Apr 2023 – Present</p>
+        <p class="exp-company">Sanjevini Properties</p>
+      </div>
+      <div class="exp-right">
+        <p class="exp-role">Digital Marketer / Social Media Manager</p>
+        <ul class="exp-bullets">
+          <li>Managed Instagram, Facebook, and LinkedIn for a real estate brand — grew organic reach and follower engagement through targeted content strategy.</li>
+          <li>Planned and executed monthly content calendars aligned with brand objectives, seasonal campaigns, and market trends for consistent publishing.</li>
+          <li>Tracked campaign performance via Meta Business Suite, Instagram Insights, and Facebook Insights — delivered monthly stakeholder reports.</li>
+          <li>Collaborated with designers and copywriters to produce reels, static posts, and stories tailored to defined target audiences.</li>
+          <li>Developed and managed PPC campaigns on Google Ads and Facebook Ads to drive qualified leads and property inquiries.</li>
+          <li>Implemented SEO best practices across digital touchpoints to improve organic discoverability and website traffic.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <p class="exp-period">May 2022 – Apr 2023</p>
+        <p class="exp-company">Stumbl</p>
+      </div>
+      <div class="exp-right">
+        <p class="exp-role">Digital Marketer</p>
+        <ul class="exp-bullets">
+          <li>Developed and implemented SEO and social media strategies to increase brand awareness, engagement, and conversions across Instagram, Facebook, and LinkedIn.</li>
+          <li>Created and curated engaging content — images, short-form video, and written copy — resonating with target audiences and driving measurable traffic.</li>
+          <li>Monitored performance metrics and used data-driven insights to refine strategy and improve campaign ROI.</li>
+          <li>Supported email marketing campaigns and PPC advertising on Google Ads and Facebook Ads for lead generation.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-tag">Capabilities</p>
+  <h2 class="section-heading">Core Skills</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">📱</div>
+      <p class="skill-name">Social Media Management</p>
+      <p class="skill-tools">Instagram · Facebook · LinkedIn · X (Twitter) · YouTube</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <p class="skill-name">Analytics & Reporting</p>
+      <p class="skill-tools">Meta Business Suite · Facebook Insights · Instagram Insights · A/B Testing</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎯</div>
+      <p class="skill-name">Campaign Strategy</p>
+      <p class="skill-tools">Content calendars · Paid + organic campaigns · Audience targeting</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">💰</div>
+      <p class="skill-name">Paid Advertising</p>
+      <p class="skill-tools">Google Ads · Facebook Ads · PPC optimisation · Lead generation</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎬</div>
+      <p class="skill-name">Video Production</p>
+      <p class="skill-tools">Adobe Premiere Pro · After Effects · DaVinci Resolve</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">✏️</div>
+      <p class="skill-name">Content Creation</p>
+      <p class="skill-tools">Copywriting · Reels · Short-form video · Canva · Lightroom · Photoshop</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <p class="section-tag">About</p>
+    <h2 class="section-heading">Who I Am</h2>
+    <div class="about-body">
+      <p>
+        I'm a Social Media Manager with 3+ years of experience building brand presence from the ground up — from content strategy and creative execution to paid campaigns and performance reporting.
+      </p>
+      <p>
+        I'm drawn to brands that sit at the intersection of culture and community — entertainment, live events, nightlife, music. I understand how content behaves differently pre-show vs. post-show, how to build ticket urgency, and how to make a brand feel as alive online as it does IRL.
+      </p>
+      <p>
+        Based in Bengaluru. Open to full-time, contract, and hybrid roles.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-tag" style="color:var(--gold); border-color:var(--gold); margin-bottom:1.5rem;">Education & Certifications</p>
+
+    <div style="margin-bottom:2rem;">
+      <p style="font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.06em; color:var(--cream);">Bachelor of Business Administration</p>
+      <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-top:0.3rem; letter-spacing:0.05em;">KARNATAK UNIVERSITY DHARWAD · 2019 – 2022</p>
+    </div>
+
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-badge">U</div>
+        <div>
+          <p class="cert-title">Certified Digital Marketing Professional</p>
+          <p class="cert-issuer">Udemy</p>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">A</div>
+        <div>
+          <p class="cert-title">Adobe Certified Expert</p>
+          <p class="cert-issuer">Adobe</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <p class="section-tag">Contact</p>
+    <h2 class="contact-heading">Let's Work<br>Together.</h2>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:Shreyankhiremath21@gmail.com" class="contact-link">
+      <div class="contact-link-icon">✉</div>
+      <span>Shreyankhiremath21@gmail.com</span>
+    </a>
+    <a href="tel:+919663568621" class="contact-link">
+      <div class="contact-link-icon">📞</div>
+      <span>+91 96635 68621</span>
+    </a>
+    <a href="https://linkedin.com/in/shreyank-hiremath" target="_blank" class="contact-link">
+      <div class="contact-link-icon">in</div>
+      <span>linkedin.com/in/shreyank-hiremath</span>
+    </a>
+    <a href="#" class="contact-link">
+      <div class="contact-link-icon">📍</div>
+      <span>Bengaluru, India</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Shreyank Hiremath</span>
+  <span>Social Media Manager · Bengaluru, India</span>
+</footer>
+
+</body>
+</html>
